@@ -44,7 +44,7 @@ class _StatePage extends State<GuestListScreen> {
                       Navigator.pop(context);
                     },
                     child: Image.asset(
-                      "images/btn_backArticle_normal.png",
+                      "assets/images/btn_backArticle_normal.png",
                       width: 40,
                       height: 40,
                     ),
@@ -53,7 +53,6 @@ class _StatePage extends State<GuestListScreen> {
                       style:
                           TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
                 ),
-                backgroundColor: Colors.transparent,
                 body: Center(
                   child: (provider.errorMessage != "")
                       ? Text(
@@ -66,14 +65,13 @@ class _StatePage extends State<GuestListScreen> {
                 ),
               )
             : Scaffold(
-                backgroundColor: Colors.transparent,
                 appBar: AppBar(
                   leading: GestureDetector(
                     onTap: () {
                       Navigator.pop(context);
                     },
                     child: Image.asset(
-                      "images/btn_backArticle_normal.png",
+                      "assets/images/btn_backArticle_normal.png",
                       width: 40,
                       height: 40,
                     ),

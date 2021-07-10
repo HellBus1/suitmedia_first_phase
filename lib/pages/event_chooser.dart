@@ -24,7 +24,7 @@ class _StatePage extends State<EventChooserScreen> {
         child: Stack(
           children: [
             Image.asset(
-              "images/bg_validation.png",
+              "assets/images/bg_validation.png",
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
               fit: BoxFit.cover,

@@ -25,14 +25,13 @@ class _StatePage extends State<EventListScreen> {
           }
         },
         child: Scaffold(
-          backgroundColor: Colors.transparent,
           appBar: AppBar(
             leading: GestureDetector(
               onTap: () {
                 Navigator.pop(context);
               },
               child: Image.asset(
-                "images/btn_backArticle_normal.png",
+                "assets/images/btn_backArticle_normal.png",
                 width: 40,
                 height: 40,
               ),

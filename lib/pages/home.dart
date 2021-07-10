@@ -40,18 +40,23 @@ class _StatePage extends State<HomeScreen> {
         child: Stack(
           children: [
             Image.asset(
-              "images/bg_validation.png",
+              "assets/images/bg_validation.png",
               height: MediaQuery.of(context).size.height,
               width: MediaQuery.of(context).size.width,
               fit: BoxFit.cover,
             ),
             Scaffold(
               backgroundColor: Colors.transparent,
-              body: Padding(
+              resizeToAvoidBottomInset: false,
+              body: SafeArea(
+                  child: SingleChildScrollView(
+                reverse: true,
                 padding: EdgeInsets.only(
                     left: MediaQuery.of(context).size.width / 17,
                     right: MediaQuery.of(context).size.width / 17),
-                child: Center(
+                child: Container(
+                  margin: EdgeInsets.only(
+                      top: MediaQuery.of(context).size.height / 15),
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.center,
@@ -88,7 +93,7 @@ class _StatePage extends State<HomeScreen> {
                           height: 50,
                         ),
                         Image.asset(
-                          "images/btn_add_photo.png",
+                          "assets/images/btn_add_photo.png",
                           width: 150,
                           height: 150,
                         ),
@@ -144,7 +149,7 @@ class _StatePage extends State<HomeScreen> {
                         )
                       ]),
                 ),
-              ),
+              )),
             )
           ],
         ),
