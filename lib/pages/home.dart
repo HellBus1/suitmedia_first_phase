@@ -113,12 +113,7 @@ class _StatePage extends State<HomeScreen> {
                           margin: EdgeInsets.only(top: 50, left: 10, right: 10),
                           child: OutlinedButton(
                               onPressed: () {
-                                if (_controller.text != "") {
-                                  provider.setName(_controller.text);
-                                  Navigator.pushNamed(context, '/event/choose');
-                                } else {
-                                  showAlertDialog(context);
-                                }
+                                showAlertDialog(context, provider);
                               },
                               child: Container(
                                 margin: EdgeInsets.only(
@@ -157,24 +152,35 @@ class _StatePage extends State<HomeScreen> {
     });
   }
 
-  showAlertDialog(BuildContext context) {
+  showAlertDialog(BuildContext context, provider) {
     // set up the button
     Widget okButton = TextButton(
         onPressed: () {
           Navigator.of(context, rootNavigator: true).pop('dialog');
         },
         child: Text(
-          "OK",
+          "Close",
+          style: TextStyle(color: Colors.blue),
+        ));
+
+    Widget checkButton = TextButton(
+        onPressed: () {
+          Navigator.of(context, rootNavigator: true).pop('dialog');
+          provider.setName(_controller.text);
+          Navigator.pushNamed(context, '/event/choose');
+        },
+        child: Text(
+          "Lanjut",
           style: TextStyle(color: Colors.blue),
         ));
 
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
       title: Text("Peringatan", style: TextStyle(color: Colors.red)),
-      content: Text("Nama tidak boleh kosong"),
-      actions: [
-        okButton,
-      ],
+      content: Text((_controller.text != "")
+          ? (isPalindrome() ? "Palindrom" : "Bukan Palindrom")
+          : ("Nama tidak boleh kosong")),
+      actions: [okButton, (_controller.text != "") ? checkButton : Container()],
     );
 
     // show the dialog
@@ -184,5 +190,14 @@ class _StatePage extends State<HomeScreen> {
         return alert;
       },
     );
+  }
+
+  isPalindrome() {
+    String inputtext = _controller.text;
+    String buffer = _controller.text;
+    String reversedinputtext =
+        String.fromCharCodes(buffer.runes.toList().reversed);
+    print(reversedinputtext);
+    return inputtext == reversedinputtext;
   }
 }

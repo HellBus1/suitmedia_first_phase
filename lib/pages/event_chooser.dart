@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
@@ -156,20 +158,41 @@ class _StatePage extends State<EventChooserScreen> {
   manageDialogContent(provider) {
     if (provider.guest != null) {
       var splitted = provider.guest.birthdate.split('-');
-      print("splits " + splitted[1]);
+      // print("splits " + splitted[1]);
+      var isPrime = primeChecker(int.parse(splitted[1]));
+
       if (int.parse(splitted[1]) % 2 == 0 && int.parse(splitted[1]) % 3 == 0) {
-        showAlertDialog(context, "iOS");
+        showAlertDialog(context, "iOS", isPrime, int.parse(splitted[1]));
       } else if (int.parse(splitted[1]) % 2 == 0) {
-        showAlertDialog(context, "blackberry");
+        showAlertDialog(context, "blackberry", isPrime, int.parse(splitted[1]));
       } else if (int.parse(splitted[1]) % 3 == 0) {
-        showAlertDialog(context, "android");
+        showAlertDialog(context, "android", isPrime, int.parse(splitted[1]));
       } else {
-        showAlertDialog(context, "featured phone");
+        showAlertDialog(
+            context, "featured phone", isPrime, int.parse(splitted[1]));
       }
     }
   }
 
-  showAlertDialog(BuildContext context, String mob) {
+  primeChecker(value) {
+    if (value <= 1) {
+      return false;
+    }
+
+    if (value == 2) {
+      return true;
+    }
+
+    for (int i = 2; i <= sqrt(value); i++) {
+      if (value % i == 0) {
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  showAlertDialog(BuildContext context, String mob, bool isPrime, int month) {
     // set up the button
     Widget okButton = TextButton(
         onPressed: () {
@@ -183,7 +206,7 @@ class _StatePage extends State<EventChooserScreen> {
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
       title: Text("Merk HP"),
-      content: Text(mob),
+      content: Text('$mob\n\n$month is prime? $isPrime'),
       actions: [
         okButton,
       ],

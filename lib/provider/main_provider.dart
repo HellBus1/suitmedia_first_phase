@@ -31,7 +31,7 @@ class MainProvider extends ChangeNotifier {
   Future<bool> getDummyGuest() async {
     loadingState = true;
     errorMessage = "";
-    notifyListeners();
+    // notifyListeners();
 
     try {
       final response = await http
