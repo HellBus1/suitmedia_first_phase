@@ -22,6 +22,8 @@ class MyApp extends StatelessWidget {
             primarySwatch: white,
           ),
           routes: {
+            // '/': (context) => HomeScreen(),
+            // '/event/choose': (context) => EventChooserScreen(),
             '/': (context) => HomeScreen(),
             '/event/choose': (context) => EventChooserScreen(),
             '/event/list': (context) => EventListScreen(),
