@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:get/get_navigation/get_navigation.dart';
 import 'package:provider/provider.dart';
 import 'package:suitmedia_first_phase/pages/event_chooser.dart';
 import 'package:suitmedia_first_phase/pages/event_list.dart';
@@ -14,23 +15,31 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-        providers: [ChangeNotifierProvider(create: (c) => MainProvider())],
-        child: MaterialApp(
-          title: 'Flutter Demo',
-          theme: ThemeData(
-            primarySwatch: white,
-          ),
-          routes: {
-            // '/': (context) => HomeScreen(),
-            // '/event/choose': (context) => EventChooserScreen(),
-            '/': (context) => HomeScreen(),
-            '/event/choose': (context) => EventChooserScreen(),
-            '/event/list': (context) => EventListScreen(),
-            '/guest/list': (context) => GuestListScreen(),
-          },
-          // home: HomeScreen(),
-        ));
+    return GetMaterialApp(
+      title: 'Suitmedia Demo',
+      theme: ThemeData(
+        primarySwatch: white,
+      ),
+      home: HomeScreen(),
+    );
+
+    // MultiProvider(
+    //     providers: [ChangeNotifierProvider(create: (c) => MainProvider())],
+    //     child: MaterialApp(
+    //       title: 'Flutter Demo',
+    //       theme: ThemeData(
+    //         primarySwatch: white,
+    //       ),
+    //       routes: {
+    //         // '/': (context) => HomeScreen(),
+    //         // '/event/choose': (context) => EventChooserScreen(),
+    //         '/': (context) => HomeScreen(),
+    //         '/event/choose': (context) => EventChooserScreen(),
+    //         '/event/list': (context) => EventListScreen(),
+    //         '/guest/list': (context) => GuestListScreen(),
+    //       },
+    //       // home: HomeScreen(),
+    //     ));
   }
 }
 
