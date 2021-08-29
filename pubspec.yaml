@@ -39,18 +39,26 @@ dependencies:
   # pull to refresh
   pull_to_refresh: ^2.0.0
   # flutter map
-  flutter_map:
+  flutter_map: 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
 
   get: ^4.3.8
 
-  dio: ^4.0.0
+  # retrofit: 
+  dio: 
+  # built_value: 
+  # json_annotation: 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  
+  # retrofit_generator: 
+  # build_runner: 
+  # json_serializable: 
+  # built_value_generator: 
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

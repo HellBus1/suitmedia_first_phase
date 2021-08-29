@@ -5,6 +5,7 @@ import 'package:suitmedia_first_phase/pages/event_chooser.dart';
 import 'package:suitmedia_first_phase/pages/event_list.dart';
 import 'package:suitmedia_first_phase/pages/guest_list.dart';
 import 'package:suitmedia_first_phase/pages/home.dart';
+import 'package:suitmedia_first_phase/pages/testingpage.dart';
 import 'package:suitmedia_first_phase/provider/main_provider.dart';
 
 void main() {
@@ -15,31 +16,28 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      title: 'Suitmedia Demo',
-      theme: ThemeData(
-        primarySwatch: white,
-      ),
-      home: HomeScreen(),
-    );
+    // return GetMaterialApp(
+    //   title: 'Suitmedia Demo',
+    //   theme: ThemeData(
+    //     primarySwatch: white,
+    //   ),
+    //   home: TestingPage(),
+    // );
 
-    // MultiProvider(
-    //     providers: [ChangeNotifierProvider(create: (c) => MainProvider())],
-    //     child: MaterialApp(
-    //       title: 'Flutter Demo',
-    //       theme: ThemeData(
-    //         primarySwatch: white,
-    //       ),
-    //       routes: {
-    //         // '/': (context) => HomeScreen(),
-    //         // '/event/choose': (context) => EventChooserScreen(),
-    //         '/': (context) => HomeScreen(),
-    //         '/event/choose': (context) => EventChooserScreen(),
-    //         '/event/list': (context) => EventListScreen(),
-    //         '/guest/list': (context) => GuestListScreen(),
-    //       },
-    //       // home: HomeScreen(),
-    //     ));
+    return MultiProvider(
+        providers: [ChangeNotifierProvider(create: (c) => MainProvider())],
+        child: MaterialApp(
+          title: 'Flutter Demo',
+          theme: ThemeData(
+            primarySwatch: white,
+          ),
+          routes: {
+            '/event/choose': (context) => EventChooserScreen(),
+            '/event/list': (context) => EventListScreen(),
+            '/guest/list': (context) => GuestListScreen(),
+          },
+          home: EventListScreen(),
+        ));
   }
 }
 

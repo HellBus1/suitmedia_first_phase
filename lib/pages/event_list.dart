@@ -45,31 +45,31 @@ class _StatePage extends State<EventListScreen> {
               ),
               title: Text("Event",
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20)),
-              bottom: (this.pageState == "eventmap")
-                  ? TabBar(
-                      isScrollable: true,
-                      unselectedLabelColor: Colors.white.withOpacity(0.3),
-                      indicatorColor: Colors.blue,
-                      tabs: [
-                          for (var item in eventList)
-                            Tab(
-                                child: Container(
-                              width: 200,
-                              child: RichText(
-                                text: TextSpan(
-                                  text: item.name ?? "",
-                                  style: TextStyle(color: Colors.black),
-                                ),
-                                maxLines: 1,
-                                textAlign: TextAlign.center,
-                                overflow: TextOverflow.ellipsis,
-                              ),
-                            ))
-                        ])
-                  : PreferredSize(
-                      preferredSize: Size.fromHeight(1),
-                      child: Container(),
-                    ),
+              // bottom: (this.pageState == "eventmap")
+              //     ? TabBar(
+              //         isScrollable: true,
+              //         unselectedLabelColor: Colors.white.withOpacity(0.3),
+              //         indicatorColor: Colors.blue,
+              //         tabs: [
+              //             for (var item in eventList)
+              //               Tab(
+              //                   child: Container(
+              //                 width: 200,
+              //                 child: RichText(
+              //                   text: TextSpan(
+              //                     text: item.name ?? "",
+              //                     style: TextStyle(color: Colors.black),
+              //                   ),
+              //                   maxLines: 1,
+              //                   textAlign: TextAlign.center,
+              //                   overflow: TextOverflow.ellipsis,
+              //                 ),
+              //               ))
+              //           ])
+              //     : PreferredSize(
+              //         preferredSize: Size.fromHeight(1),
+              //         child: Container(),
+              //       ),
               actions: [
                 IconButton(
                     onPressed: () {
