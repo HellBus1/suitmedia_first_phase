@@ -9,7 +9,7 @@ List<Event> eventList = [
         'https://jadwalevent.web.id/wp-content/uploads/2021/07/POSTER-BATCH-03-01-720x405.jpg',
     name: 'Online Training ISO Series',
     date: DateTime.now(),
-    latitude: -6.200000,
+    latitude: 6.200000,
     longitude: 106.816666,
   ),
   new Event(
@@ -17,7 +17,7 @@ List<Event> eventList = [
         'https://jadwalevent.web.id/wp-content/uploads/2021/07/PAI-CPD-WEBINAR-2021-16-720x405.jpg',
     name: 'Workshop Barista Series',
     date: DateFormat('yyyy-MM-dd – kk:mm').parseLoose('2022-08-12 20:00'),
-    latitude: -7.161367,
+    latitude: 7.161367,
     longitude: 113.482498,
   ),
   new Event(
@@ -35,7 +35,7 @@ List<Event> eventList = [
     name:
         'SOLO LEADING INDUSTRY EXPO 2021 (Pameran Perdagangan, Perindustrian, Pariwisata, Investasi dan Pertanian Perikanan)',
     date: DateTime.now(),
-    latitude: -3.654703,
+    latitude: 3.654703,
     longitude: 128.190643,
   ),
   new Event(
@@ -43,7 +43,7 @@ List<Event> eventList = [
         'https://jadwalevent.web.id/wp-content/uploads/2021/07/toba-talks-12-A-1-720x405.jpg',
     name: 'Cara Membuat Konten Instagram Juara Toba.ai Challenge',
     date: DateFormat('yyyy-MM-dd – kk:mm').parseLoose('2022-07-05 20:00'),
-    latitude: -2.994494,
+    latitude: 2.994494,
     longitude: 120.195465,
   ),
   new Event(
@@ -51,7 +51,7 @@ List<Event> eventList = [
         'https://jadwalevent.web.id/wp-content/uploads/2021/07/IMG-20210703-WA0012-719x405.jpg',
     name: 'Sharing Gigi Sehat Senyum Hebat 3',
     date: DateFormat('yyyy-MM-dd – kk:mm').parseLoose('2021-12-12 20:00'),
-    latitude: -7.025253,
+    latitude: 7.025253,
     longitude: 107.519760,
   ),
   new Event(

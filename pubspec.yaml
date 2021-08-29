@@ -25,29 +25,31 @@ dependencies:
     sdk: flutter
 
   # provider
-  provider:
+  provider: any
   # cached image
-  cached_network_image:
+  cached_network_image: any
   # intl
-  intl:
+  intl: any
   # http
-  http: 
+  http: any
   # path provider
-  path_provider:
+  path_provider: any
   # Connectivity
-  connectivity:
+  connectivity: any
   # pull to refresh
   pull_to_refresh: ^2.0.0
   # flutter map
-  flutter_map: 
+  flutter_map: any
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
 
-  get: ^4.3.8
+  get: any
+
+  location: any
 
   # retrofit: 
-  dio: 
+  dio: any
   # built_value: 
   # json_annotation: 
 

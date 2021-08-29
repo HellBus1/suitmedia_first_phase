@@ -3,13 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:intl/intl.dart';
 import 'package:suitmedia_first_phase/constant.dart';
-import 'package:suitmedia_first_phase/provider/main_provider.dart';
 
 class EventListComponent extends StatefulWidget {
-  final MainProvider provider;
-
-  EventListComponent({@required this.provider});
-
   @override
   State<StatefulWidget> createState() {
     return _State();
@@ -25,7 +20,7 @@ class _State extends State<EventListComponent> {
           final item = eventList[index];
           return GestureDetector(
             onTap: () {
-              widget.provider.setEvent(item);
+              // widget.provider.setEvent(item);
               Navigator.pop(context);
             },
             child: Container(
