@@ -11,6 +11,7 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:hive/hive.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:suitmedia_first_phase/model/guest.dart';
+import 'package:suitmedia_first_phase/pages/event_chooser.dart';
 
 class GuestListScreen extends StatelessWidget {
   final GuestListController _getxController = Get.put(GuestListController());
@@ -86,8 +87,8 @@ class GuestListScreen extends StatelessWidget {
                         final item = box.getAt(index);
                         return GestureDetector(
                           onTap: () {
-                            // provider.setGuest(item);
-                            // Navigator.pop(context, "success");
+                            _getxController.setGuest(item);
+                            Get.back(result: "success");
                           },
                           child: Container(
                             child: Card(

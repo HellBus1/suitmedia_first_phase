@@ -10,11 +10,10 @@ import 'package:suitmedia_first_phase/model/guest.dart';
 import 'package:get/get.dart';
 
 class GuestListController extends GetxController {
-  String selectedGuest = "";
   bool guestLoadingState = false;
   var guestList = [].obs;
   String errorMessage = "";
-  Guest guest;
+  var guest = Guest(id: 1, name: "", birthdate: "").obs;
   Dio dio = Dio();
 
   RefreshController refreshController =
@@ -50,10 +49,7 @@ class GuestListController extends GetxController {
           await dio.get("http://www.mocky.io/v2/596dec7f0f000023032b8017");
       if (response.statusCode == 200) {
         guestList.clear();
-        var temporaryList = [];
 
-        // print("${jsonDecode(response.data).length}");
-        // guestList.value = temporaryList;
         var box = Hive.box<Guest>('guest');
         if (box.length >= 1) {
           await box.clear();
@@ -65,6 +61,11 @@ class GuestListController extends GetxController {
     } catch (e) {
       debugPrint("Fecth guest error -- onCatch ${e.toString()}");
     }
+  }
+
+  setGuest(Guest guest) {
+    this.guest.value = guest;
+    update();
   }
 
   @override

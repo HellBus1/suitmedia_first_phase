@@ -2,175 +2,169 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
-import 'package:provider/provider.dart';
-import 'package:suitmedia_first_phase/provider/main_provider.dart';
+import 'package:get/get.dart';
+import 'package:suitmedia_first_phase/controller/event_list_controller.dart';
+import 'package:suitmedia_first_phase/controller/guest_list_controller.dart';
+import 'package:suitmedia_first_phase/controller/home_controller.dart';
+import 'package:suitmedia_first_phase/pages/event_list.dart';
+import 'package:suitmedia_first_phase/pages/guest_list.dart';
 
-class EventChooserScreen extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return _StatePage();
-  }
-}
+class EventChooserScreen extends StatelessWidget {
+  final HomeController homeController = Get.put(HomeController());
+  final EventListController eventListController =
+      Get.put(EventListController());
+  final GuestListController guestListController =
+      Get.put(GuestListController());
 
-class _StatePage extends State<EventChooserScreen> {
   @override
   Widget build(BuildContext context) {
-    return Consumer<MainProvider>(builder: (context, provider, child) {
-      return GestureDetector(
-        onTap: () {
-          FocusScopeNode currentFocus = FocusScope.of(context);
-          if (!currentFocus.hasPrimaryFocus) {
-            currentFocus.unfocus();
-          }
-        },
-        child: Stack(
-          children: [
-            Image.asset(
-              "assets/images/bg_validation.png",
-              height: MediaQuery.of(context).size.height,
-              width: MediaQuery.of(context).size.width,
-              fit: BoxFit.cover,
-            ),
-            Scaffold(
-              backgroundColor: Colors.transparent,
-              body: Padding(
-                padding: EdgeInsets.only(
-                    left: MediaQuery.of(context).size.width / 17,
-                    right: MediaQuery.of(context).size.width / 17),
-                child: Center(
-                  child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Row(
-                          children: <Widget>[
-                            Expanded(
-                              child: Text(
-                                "Nama :",
-                                style: TextStyle(
-                                    letterSpacing: 1.2,
-                                    color: Colors.white,
-                                    fontSize: 20),
-                                textAlign: TextAlign.left,
-                              ),
+    return GestureDetector(
+      onTap: () {
+        FocusScopeNode currentFocus = FocusScope.of(context);
+        if (!currentFocus.hasPrimaryFocus) {
+          currentFocus.unfocus();
+        }
+      },
+      child: Stack(
+        children: [
+          Image.asset(
+            "assets/images/bg_validation.png",
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
+            fit: BoxFit.cover,
+          ),
+          Scaffold(
+            backgroundColor: Colors.transparent,
+            body: Padding(
+              padding: EdgeInsets.only(
+                  left: MediaQuery.of(context).size.width / 17,
+                  right: MediaQuery.of(context).size.width / 17),
+              child: Center(
+                child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Row(
+                        children: <Widget>[
+                          Expanded(
+                            child: Text(
+                              "Nama :",
+                              style: TextStyle(
+                                  letterSpacing: 1.2,
+                                  color: Colors.white,
+                                  fontSize: 20),
+                              textAlign: TextAlign.left,
                             ),
-                            Expanded(
-                              child: Text(
-                                provider.name ?? "",
-                                style: TextStyle(
-                                    letterSpacing: 1.2,
-                                    color: Colors.white,
-                                    fontSize: 20),
-                                textAlign: TextAlign.left,
-                              ),
+                          ),
+                          Expanded(
+                            child: Obx(() => Text(
+                                  homeController.name.value ?? "",
+                                  style: TextStyle(
+                                      letterSpacing: 1.2,
+                                      color: Colors.white,
+                                      fontSize: 20),
+                                  textAlign: TextAlign.left,
+                                )),
+                          ),
+                        ],
+                      ),
+                      SizedBox(
+                        height: 50,
+                      ),
+                      Container(
+                        width: double.infinity,
+                        margin: EdgeInsets.only(top: 50),
+                        child: OutlinedButton(
+                            onPressed: () {
+                              Navigator.pushNamed(context, '/event/list');
+                              Get.to(EventListScreen());
+                            },
+                            child: Container(
+                              margin: EdgeInsets.only(
+                                  top: MediaQuery.of(context).size.height / 54,
+                                  bottom:
+                                      MediaQuery.of(context).size.height / 54),
+                              child: Obx(() => Text(
+                                    eventListController.eventName.value != ""
+                                        ? eventListController.eventName.value
+                                        : "Pilih Event",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        letterSpacing: 1.2),
+                                  )),
                             ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 50,
-                        ),
-                        Container(
-                          width: double.infinity,
-                          margin: EdgeInsets.only(top: 50),
-                          child: OutlinedButton(
-                              onPressed: () {
-                                Navigator.pushNamed(context, '/event/list');
-                              },
-                              child: Container(
-                                margin: EdgeInsets.only(
-                                    top:
-                                        MediaQuery.of(context).size.height / 54,
-                                    bottom: MediaQuery.of(context).size.height /
-                                        54),
-                                child: Text(
-                                  provider.event != null
-                                      ? provider.event.name
-                                      : "Pilih Event",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      letterSpacing: 1.2),
-                                ),
-                              ),
-                              style: ButtonStyle(
-                                side: MaterialStateProperty.all<BorderSide>(
-                                    BorderSide(
-                                        style: BorderStyle.solid,
-                                        color: Colors.white,
-                                        width: 2)),
-                                shape:
-                                    MaterialStateProperty.all<OutlinedBorder>(
-                                        RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(7)),
-                                )),
+                            style: ButtonStyle(
+                              side: MaterialStateProperty.all<BorderSide>(
+                                  BorderSide(
+                                      style: BorderStyle.solid,
+                                      color: Colors.white,
+                                      width: 2)),
+                              shape: MaterialStateProperty.all<OutlinedBorder>(
+                                  RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(7)),
                               )),
-                        ),
-                        Container(
-                          width: double.infinity,
-                          margin: EdgeInsets.only(top: 50),
-                          child: OutlinedButton(
-                              onPressed: () async {
-                                var result = await Navigator.pushNamed(
-                                    context, '/guest/list');
-                                if (result == "success") {
-                                  manageDialogContent(provider);
-                                }
-                              },
-                              child: Container(
-                                margin: EdgeInsets.only(
-                                    top:
-                                        MediaQuery.of(context).size.height / 54,
-                                    bottom: MediaQuery.of(context).size.height /
-                                        54),
-                                child: Text(
-                                  provider.guest != null
-                                      ? provider.guest.name
-                                      : "Pilih Guest",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      letterSpacing: 1.2),
-                                ),
-                              ),
-                              style: ButtonStyle(
-                                side: MaterialStateProperty.all<BorderSide>(
-                                    BorderSide(
-                                        style: BorderStyle.solid,
-                                        color: Colors.white,
-                                        width: 2)),
-                                shape:
-                                    MaterialStateProperty.all<OutlinedBorder>(
-                                        RoundedRectangleBorder(
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(7)),
-                                )),
+                            )),
+                      ),
+                      Container(
+                        width: double.infinity,
+                        margin: EdgeInsets.only(top: 50),
+                        child: OutlinedButton(
+                            onPressed: () async {
+                              var result = await Get.to(GuestListScreen());
+                              print(result);
+                              if (result == "success") {
+                                manageDialogContent();
+                              }
+                            },
+                            child: Container(
+                              margin: EdgeInsets.only(
+                                  top: MediaQuery.of(context).size.height / 54,
+                                  bottom:
+                                      MediaQuery.of(context).size.height / 54),
+                              child: Obx(() => Text(
+                                    guestListController.guest.value.name != ""
+                                        ? guestListController.guest.value.name
+                                        : "Pilih Guest",
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        letterSpacing: 1.2),
+                                  )),
+                            ),
+                            style: ButtonStyle(
+                              side: MaterialStateProperty.all<BorderSide>(
+                                  BorderSide(
+                                      style: BorderStyle.solid,
+                                      color: Colors.white,
+                                      width: 2)),
+                              shape: MaterialStateProperty.all<OutlinedBorder>(
+                                  RoundedRectangleBorder(
+                                borderRadius:
+                                    BorderRadius.all(Radius.circular(7)),
                               )),
-                        )
-                      ]),
-                ),
+                            )),
+                      )
+                    ]),
               ),
-            )
-          ],
-        ),
-      );
-    });
+            ),
+          )
+        ],
+      ),
+    );
   }
 
-  manageDialogContent(provider) {
-    if (provider.guest != null) {
-      var splitted = provider.guest.birthdate.split('-');
-      // print("splits " + splitted[1]);
-      var isPrime = primeChecker(int.parse(splitted[1]));
+  manageDialogContent() {
+    var splitted = guestListController.guest.value.birthdate.split('-');
+    var isPrime = primeChecker(int.parse(splitted[1]));
 
-      if (int.parse(splitted[1]) % 2 == 0 && int.parse(splitted[1]) % 3 == 0) {
-        showAlertDialog(context, "iOS", isPrime, int.parse(splitted[1]));
-      } else if (int.parse(splitted[1]) % 2 == 0) {
-        showAlertDialog(context, "blackberry", isPrime, int.parse(splitted[1]));
-      } else if (int.parse(splitted[1]) % 3 == 0) {
-        showAlertDialog(context, "android", isPrime, int.parse(splitted[1]));
-      } else {
-        showAlertDialog(
-            context, "featured phone", isPrime, int.parse(splitted[1]));
-      }
+    if (int.parse(splitted[1]) % 2 == 0 && int.parse(splitted[1]) % 3 == 0) {
+      showAlertDialog("iOS", isPrime, int.parse(splitted[1]));
+    } else if (int.parse(splitted[1]) % 2 == 0) {
+      showAlertDialog("blackberry", isPrime, int.parse(splitted[1]));
+    } else if (int.parse(splitted[1]) % 3 == 0) {
+      showAlertDialog("android", isPrime, int.parse(splitted[1]));
+    } else {
+      showAlertDialog("featured phone", isPrime, int.parse(splitted[1]));
     }
   }
 
@@ -192,11 +186,11 @@ class _StatePage extends State<EventChooserScreen> {
     return true;
   }
 
-  showAlertDialog(BuildContext context, String mob, bool isPrime, int month) {
+  showAlertDialog(String mob, bool isPrime, int month) {
     // set up the button
     Widget okButton = TextButton(
         onPressed: () {
-          Navigator.of(context, rootNavigator: true).pop('dialog');
+          Navigator.of(Get.overlayContext).pop();
         },
         child: Text(
           "OK",
@@ -213,11 +207,6 @@ class _StatePage extends State<EventChooserScreen> {
     );
 
     // show the dialog
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
-    );
+    Get.dialog(alert);
   }
 }

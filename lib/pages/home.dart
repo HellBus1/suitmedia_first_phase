@@ -3,30 +3,12 @@ import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+import 'package:suitmedia_first_phase/controller/home_controller.dart';
+import 'package:suitmedia_first_phase/pages/event_chooser.dart';
 import 'package:suitmedia_first_phase/provider/main_provider.dart';
 
-class HomeScreen extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return _StatePage();
-  }
-}
-
-class _StatePage extends State<HomeScreen> {
-  TextEditingController _controller;
-
-  @override
-  void initState() {
-    super.initState();
-    _controller = TextEditingController();
-    // final provider = Provider.of<MainProvider>(context, listen: false);
-  }
-
-  @override
-  void dispose() {
-    _controller.dispose();
-    super.dispose();
-  }
+class HomeScreen extends StatelessWidget {
+  final HomeController homeController = Get.put(HomeController());
 
   @override
   Widget build(BuildContext context) {
@@ -101,7 +83,7 @@ class _StatePage extends State<HomeScreen> {
                         height: 50,
                       ),
                       TextField(
-                        controller: _controller,
+                        controller: homeController.textcontroller,
                         decoration: InputDecoration(
                           // border: OutlineInputBorder(),
                           labelText: 'Masukkan Nama',
@@ -153,7 +135,7 @@ class _StatePage extends State<HomeScreen> {
     // set up the button
     Widget okButton = TextButton(
         onPressed: () {
-          Navigator.of(context, rootNavigator: true).pop('dialog');
+          Navigator.of(Get.overlayContext).pop();
         },
         child: Text(
           "Close",
@@ -162,9 +144,9 @@ class _StatePage extends State<HomeScreen> {
 
     Widget checkButton = TextButton(
         onPressed: () {
-          Navigator.of(context, rootNavigator: true).pop('dialog');
-          // provider.setName(_controller.text);
-          Navigator.pushNamed(context, '/event/choose');
+          Navigator.of(Get.overlayContext).pop();
+          homeController.setName();
+          Get.to(EventChooserScreen());
         },
         child: Text(
           "Lanjut",
@@ -174,10 +156,13 @@ class _StatePage extends State<HomeScreen> {
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
       title: Text("Peringatan", style: TextStyle(color: Colors.red)),
-      content: Text((_controller.text != "")
+      content: Text((homeController.textcontroller.text != "")
           ? (isPalindrome() ? "Palindrom" : "Bukan Palindrom")
           : ("Nama tidak boleh kosong")),
-      actions: [okButton, (_controller.text != "") ? checkButton : Container()],
+      actions: [
+        okButton,
+        (homeController.textcontroller.text != "") ? checkButton : Container()
+      ],
     );
 
     // // show the dialog
@@ -185,8 +170,8 @@ class _StatePage extends State<HomeScreen> {
   }
 
   isPalindrome() {
-    String inputtext = _controller.text;
-    String buffer = _controller.text;
+    String inputtext = homeController.textcontroller.text;
+    String buffer = homeController.textcontroller.text;
     String reversedinputtext =
         String.fromCharCodes(buffer.runes.toList().reversed);
     print(reversedinputtext);
