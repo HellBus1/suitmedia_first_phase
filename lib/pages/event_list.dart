@@ -5,16 +5,8 @@ import 'package:suitmedia_first_phase/controller/event_list_controller.dart';
 import 'package:suitmedia_first_phase/pages/components/event_list_component.dart';
 import 'package:suitmedia_first_phase/pages/components/map_view_component.dart';
 
-class EventListScreen extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return _StatePage();
-  }
-}
-
-class _StatePage extends State<EventListScreen> {
-  // String pageState = "eventlist";
-  EventListController getXController = Get.put(EventListController());
+class EventListScreen extends StatelessWidget {
+  final EventListController getXController = Get.put(EventListController());
 
   @override
   Widget build(BuildContext context) {

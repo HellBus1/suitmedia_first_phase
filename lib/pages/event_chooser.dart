@@ -76,7 +76,6 @@ class EventChooserScreen extends StatelessWidget {
                         margin: EdgeInsets.only(top: 50),
                         child: OutlinedButton(
                             onPressed: () {
-                              Navigator.pushNamed(context, '/event/list');
                               Get.to(EventListScreen());
                             },
                             child: Container(
@@ -85,8 +84,8 @@ class EventChooserScreen extends StatelessWidget {
                                   bottom:
                                       MediaQuery.of(context).size.height / 54),
                               child: Obx(() => Text(
-                                    eventListController.eventName.value != ""
-                                        ? eventListController.eventName.value
+                                    eventListController.event.value.name != ""
+                                        ? eventListController.event.value.name
                                         : "Pilih Event",
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,

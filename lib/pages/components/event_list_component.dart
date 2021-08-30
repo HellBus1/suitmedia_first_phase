@@ -1,17 +1,16 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
 import 'package:intl/intl.dart';
 import 'package:suitmedia_first_phase/constant.dart';
+import 'package:suitmedia_first_phase/controller/event_list_controller.dart';
+import 'package:suitmedia_first_phase/pages/event_chooser.dart';
 
-class EventListComponent extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() {
-    return _State();
-  }
-}
+class EventListComponent extends StatelessWidget {
+  final EventListController eventListController =
+      Get.put(EventListController());
 
-class _State extends State<EventListComponent> {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
@@ -20,8 +19,8 @@ class _State extends State<EventListComponent> {
           final item = eventList[index];
           return GestureDetector(
             onTap: () {
-              // widget.provider.setEvent(item);
-              Navigator.pop(context);
+              eventListController.setEvent(item);
+              Get.off(EventChooserScreen());
             },
             child: Container(
               child: Card(
