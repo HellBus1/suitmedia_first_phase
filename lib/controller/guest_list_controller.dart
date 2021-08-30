@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
+import 'package:hive/hive.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:suitmedia_first_phase/model/guest.dart';
 import 'package:get/get.dart';
@@ -43,18 +44,23 @@ class GuestListController extends GetxController {
     update();
   }
 
-  Future<List<Guest>> _fetchGuests() async {
+  Future<void> _fetchGuests() async {
     try {
       final response =
           await dio.get("http://www.mocky.io/v2/596dec7f0f000023032b8017");
       if (response.statusCode == 200) {
         guestList.clear();
         var temporaryList = [];
-        for (var tempJson in response.data) {
-          temporaryList.add(Guest.fromJson(tempJson));
-        }
+
         // print("${jsonDecode(response.data).length}");
-        guestList.value = temporaryList;
+        // guestList.value = temporaryList;
+        var box = Hive.box<Guest>('guest');
+        if (box.length >= 1) {
+          await box.clear();
+        }
+        for (var tempJson in response.data) {
+          box.add(Guest.fromJson(tempJson));
+        }
       }
     } catch (e) {
       debugPrint("Fecth guest error -- onCatch ${e.toString()}");
@@ -62,7 +68,8 @@ class GuestListController extends GetxController {
   }
 
   @override
-  void onInit() {
+  void onInit() async {
+    await Hive.openBox<Guest>('guest');
     _fetchGuests();
     super.onInit();
   }

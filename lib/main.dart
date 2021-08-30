@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:hive/hive.dart';
+import 'package:path_provider/path_provider.dart';
 import 'package:provider/provider.dart';
+import 'package:suitmedia_first_phase/model/guest.dart';
 import 'package:suitmedia_first_phase/pages/event_chooser.dart';
 import 'package:suitmedia_first_phase/pages/event_list.dart';
 import 'package:suitmedia_first_phase/pages/guest_list.dart';
@@ -12,32 +15,32 @@ void main() {
   runApp(MyApp());
 }
 
+Future _openBoxInit() async {
+  var dir = await getApplicationDocumentsDirectory();
+  Hive.init(dir.path);
+  Hive.registerAdapter(GuestAdapter());
+  await Hive.openBox<Guest>('guest');
+}
+
 class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    // return GetMaterialApp(
-    //   title: 'Suitmedia Demo',
-    //   theme: ThemeData(
-    //     primarySwatch: white,
-    //   ),
-    //   home: TestingPage(),
-    // );
-
-    return MultiProvider(
-        providers: [ChangeNotifierProvider(create: (c) => MainProvider())],
-        child: MaterialApp(
-          title: 'Flutter Demo',
-          theme: ThemeData(
-            primarySwatch: white,
-          ),
-          routes: {
-            '/event/choose': (context) => EventChooserScreen(),
-            '/event/list': (context) => EventListScreen(),
-            '/guest/list': (context) => GuestListScreen(),
-          },
-          home: EventListScreen(),
-        ));
+    return GetMaterialApp(
+      title: 'Suitmedia Demo',
+      theme: ThemeData(
+        primarySwatch: white,
+      ),
+      home: FutureBuilder(
+        future: _openBoxInit(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.done) {
+            return HomeScreen();
+          }
+          return Scaffold();
+        },
+      ),
+    );
   }
 }
 

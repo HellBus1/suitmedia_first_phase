@@ -1,14 +1,9 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
-import 'package:suitmedia_first_phase/constant.dart';
 import 'package:suitmedia_first_phase/controller/event_list_controller.dart';
 import 'package:suitmedia_first_phase/pages/components/event_list_component.dart';
 import 'package:suitmedia_first_phase/pages/components/map_view_component.dart';
-import 'package:suitmedia_first_phase/provider/main_provider.dart';
 
 class EventListScreen extends StatefulWidget {
   @override
