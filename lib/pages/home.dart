@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:suitmedia_first_phase/provider/main_provider.dart';
 
@@ -112,7 +113,7 @@ class _StatePage extends State<HomeScreen> {
                         margin: EdgeInsets.only(top: 50, left: 10, right: 10),
                         child: OutlinedButton(
                             onPressed: () {
-                              // showAlertDialog(context, provider);
+                              showAlertDialog();
                             },
                             child: Container(
                               margin: EdgeInsets.only(
@@ -148,44 +149,39 @@ class _StatePage extends State<HomeScreen> {
     );
   }
 
-  showAlertDialog(BuildContext context, provider) {
+  showAlertDialog() {
     // set up the button
-    // Widget okButton = TextButton(
-    //     onPressed: () {
-    //       Navigator.of(context, rootNavigator: true).pop('dialog');
-    //     },
-    //     child: Text(
-    //       "Close",
-    //       style: TextStyle(color: Colors.blue),
-    //     ));
+    Widget okButton = TextButton(
+        onPressed: () {
+          Navigator.of(context, rootNavigator: true).pop('dialog');
+        },
+        child: Text(
+          "Close",
+          style: TextStyle(color: Colors.blue),
+        ));
 
-    // Widget checkButton = TextButton(
-    //     onPressed: () {
-    //       Navigator.of(context, rootNavigator: true).pop('dialog');
-    //       provider.setName(_controller.text);
-    //       Navigator.pushNamed(context, '/event/choose');
-    //     },
-    //     child: Text(
-    //       "Lanjut",
-    //       style: TextStyle(color: Colors.blue),
-    //     ));
+    Widget checkButton = TextButton(
+        onPressed: () {
+          Navigator.of(context, rootNavigator: true).pop('dialog');
+          // provider.setName(_controller.text);
+          Navigator.pushNamed(context, '/event/choose');
+        },
+        child: Text(
+          "Lanjut",
+          style: TextStyle(color: Colors.blue),
+        ));
 
-    // // set up the AlertDialog
-    // AlertDialog alert = AlertDialog(
-    //   title: Text("Peringatan", style: TextStyle(color: Colors.red)),
-    //   content: Text((_controller.text != "")
-    //       ? (isPalindrome() ? "Palindrom" : "Bukan Palindrom")
-    //       : ("Nama tidak boleh kosong")),
-    //   actions: [okButton, (_controller.text != "") ? checkButton : Container()],
-    // );
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text("Peringatan", style: TextStyle(color: Colors.red)),
+      content: Text((_controller.text != "")
+          ? (isPalindrome() ? "Palindrom" : "Bukan Palindrom")
+          : ("Nama tidak boleh kosong")),
+      actions: [okButton, (_controller.text != "") ? checkButton : Container()],
+    );
 
     // // show the dialog
-    // showDialog(
-    //   context: context,
-    //   builder: (BuildContext context) {
-    //     return alert;
-    //   },
-    // );
+    Get.dialog(alert);
   }
 
   isPalindrome() {
