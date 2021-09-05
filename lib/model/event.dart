@@ -1,7 +1,3 @@
-import 'dart:ffi';
-
-import 'package:meta/meta.dart';
-
 class Event {
   final String image;
   final String name;
@@ -10,11 +6,11 @@ class Event {
   final double longitude;
 
   Event(
-      {@required this.image,
-      @required this.name,
-      @required this.date,
-      @required this.latitude,
-      @required this.longitude});
+      {required this.image,
+      required this.name,
+      required this.date,
+      required this.latitude,
+      required this.longitude});
 
   Map<String, dynamic> toMap() => {'image': image, 'name': name, 'date': date};
 }

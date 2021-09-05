@@ -10,11 +10,9 @@ import 'package:suitmedia_first_phase/pages/event_list.dart';
 import 'package:suitmedia_first_phase/pages/guest_list.dart';
 
 class EventChooserScreen extends StatelessWidget {
-  final HomeController homeController = Get.put(HomeController());
-  final EventListController eventListController =
-      Get.put(EventListController());
-  final GuestListController guestListController =
-      Get.put(GuestListController());
+  final HomeController homeController = Get.find();
+  final EventListController eventListController = Get.find();
+  final GuestListController guestListController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -58,7 +56,7 @@ class EventChooserScreen extends StatelessWidget {
                           ),
                           Expanded(
                             child: Obx(() => Text(
-                                  homeController.name.value ?? "",
+                                  homeController.name.value,
                                   style: TextStyle(
                                       letterSpacing: 1.2,
                                       color: Colors.white,
@@ -189,7 +187,7 @@ class EventChooserScreen extends StatelessWidget {
     // set up the button
     Widget okButton = TextButton(
         onPressed: () {
-          Navigator.of(Get.overlayContext).pop();
+          Navigator.of(Get.overlayContext as BuildContext).pop();
         },
         child: Text(
           "OK",

@@ -18,7 +18,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.7.0 <3.0.0"
+  sdk: ">=2.12.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -37,12 +37,12 @@ dependencies:
   # Connectivity
   connectivity: any
   # pull to refresh
-  pull_to_refresh: ^2.0.0
+  pull_to_refresh: any
   # flutter map
   flutter_map: any
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
-  cupertino_icons: ^1.0.2
+  cupertino_icons: any
 
   hive: any
   hive_provider: any
@@ -54,15 +54,16 @@ dependencies:
   # retrofit: 
   dio: any
   # built_value: 
-  # json_annotation: 
+  json_annotation: any
+  retrofit: any
+  logger: any 
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   hive_generator: any
-  # retrofit_generator: 
-  # build_runner: 
-  # json_serializable: 
+  retrofit_generator: any 
+  json_serializable: any
   # built_value_generator:
   build_runner: any 
 

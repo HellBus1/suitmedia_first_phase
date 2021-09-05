@@ -6,7 +6,7 @@ import 'package:suitmedia_first_phase/pages/components/event_list_component.dart
 import 'package:suitmedia_first_phase/pages/components/map_view_component.dart';
 
 class EventListScreen extends StatelessWidget {
-  final EventListController getXController = Get.put(EventListController());
+  final EventListController getXController = Get.find();
 
   @override
   Widget build(BuildContext context) {

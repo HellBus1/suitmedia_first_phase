@@ -2,12 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class HomeController extends GetxController {
-  TextEditingController textcontroller;
+  TextEditingController textcontroller = TextEditingController();
   RxString name = "".obs;
 
   @override
   void onInit() {
-    textcontroller = TextEditingController();
     super.onInit();
   }
 

@@ -9,11 +9,11 @@ import 'package:http/http.dart' as http;
 import 'package:suitmedia_first_phase/model/guest.dart';
 
 class MainProvider extends ChangeNotifier {
-  String name;
-  Event event;
-  Guest guest;
+  String? name;
+  Event? event;
+  Guest? guest;
   bool loadingState = true;
-  bool isConnected;
+  bool? isConnected;
   List guestList = [];
   String errorMessage = "";
   final String fileName = "guests.json";
@@ -71,11 +71,11 @@ class MainProvider extends ChangeNotifier {
   writeToFile(value) async {
     String _filePath = await filePath();
     File userDocumentFile = File(_filePath);
-    userDocumentFile?.writeAsStringSync(value);
+    userDocumentFile.writeAsStringSync(value);
   }
 
   Future<Directory> documentsPath() async {
-    String tempPath = (await getApplicationDocumentsDirectory())?.path;
+    String tempPath = (await getApplicationDocumentsDirectory()).path;
     return Directory("$tempPath").create();
   }
 
@@ -91,7 +91,7 @@ class MainProvider extends ChangeNotifier {
     try {
       String _filePath = await filePath();
       File userDocumentFile = File(_filePath);
-      final data = await userDocumentFile?.readAsString();
+      final data = await userDocumentFile.readAsString();
       final jsonData = jsonDecode(data);
 
       if (jsonData != null) {

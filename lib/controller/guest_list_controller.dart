@@ -8,6 +8,7 @@ import 'package:hive/hive.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 import 'package:suitmedia_first_phase/model/guest.dart';
 import 'package:get/get.dart';
+import 'package:suitmedia_first_phase/service/api_client.dart';
 
 class GuestListController extends GetxController {
   bool guestLoadingState = false;
@@ -44,19 +45,20 @@ class GuestListController extends GetxController {
   }
 
   Future<void> _fetchGuests() async {
+    print("kesini");
     try {
-      final response =
-          await dio.get("http://www.mocky.io/v2/596dec7f0f000023032b8017");
-      if (response.statusCode == 200) {
-        guestList.clear();
+      final client =
+          ApiClient(Dio(BaseOptions(contentType: "application/json")));
+      final response = await client.getGuest();
+      print("get guest $response");
+      guestList.clear();
 
-        var box = Hive.box<Guest>('guest');
-        if (box.length >= 1) {
-          await box.clear();
-        }
-        for (var tempJson in response.data) {
-          box.add(Guest.fromJson(tempJson));
-        }
+      var box = Hive.box<Guest>('guest');
+      if (box.length >= 1) {
+        await box.clear();
+      }
+      for (var tempJson in response) {
+        box.add(tempJson);
       }
     } catch (e) {
       debugPrint("Fecth guest error -- onCatch ${e.toString()}");
@@ -70,7 +72,6 @@ class GuestListController extends GetxController {
 
   @override
   void onInit() async {
-    await Hive.openBox<Guest>('guest');
     _fetchGuests();
     super.onInit();
   }

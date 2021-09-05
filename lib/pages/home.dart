@@ -1,14 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
 import 'package:suitmedia_first_phase/controller/home_controller.dart';
 import 'package:suitmedia_first_phase/pages/event_chooser.dart';
-import 'package:suitmedia_first_phase/provider/main_provider.dart';
 
 class HomeScreen extends StatelessWidget {
-  final HomeController homeController = Get.put(HomeController());
+  final HomeController homeController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -135,7 +132,7 @@ class HomeScreen extends StatelessWidget {
     // set up the button
     Widget okButton = TextButton(
         onPressed: () {
-          Navigator.of(Get.overlayContext).pop();
+          Navigator.of(Get.overlayContext as BuildContext).pop();
         },
         child: Text(
           "Close",
@@ -144,7 +141,7 @@ class HomeScreen extends StatelessWidget {
 
     Widget checkButton = TextButton(
         onPressed: () {
-          Navigator.of(Get.overlayContext).pop();
+          Navigator.of(Get.overlayContext as BuildContext).pop();
           homeController.setName();
           Get.to(EventChooserScreen());
         },

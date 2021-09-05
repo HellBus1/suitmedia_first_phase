@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get_navigation/get_navigation.dart';
+import 'package:get/instance_manager.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart';
-import 'package:provider/provider.dart';
+import 'package:suitmedia_first_phase/controller/event_list_controller.dart';
+import 'package:suitmedia_first_phase/controller/guest_list_controller.dart';
+import 'package:suitmedia_first_phase/controller/home_controller.dart';
 import 'package:suitmedia_first_phase/model/guest.dart';
-import 'package:suitmedia_first_phase/pages/event_chooser.dart';
-import 'package:suitmedia_first_phase/pages/event_list.dart';
-import 'package:suitmedia_first_phase/pages/guest_list.dart';
 import 'package:suitmedia_first_phase/pages/home.dart';
-import 'package:suitmedia_first_phase/pages/testingpage.dart';
-import 'package:suitmedia_first_phase/provider/main_provider.dart';
 
 void main() {
   runApp(MyApp());
@@ -31,6 +29,11 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: white,
       ),
+      initialBinding: BindingsBuilder(() => {
+            Get.put(HomeController()),
+            Get.put(EventListController()),
+            Get.put(GuestListController())
+          }),
       home: FutureBuilder(
         future: _openBoxInit(),
         builder: (context, snapshot) {

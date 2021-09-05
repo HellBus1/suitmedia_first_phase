@@ -14,7 +14,7 @@ import 'package:suitmedia_first_phase/model/guest.dart';
 import 'package:suitmedia_first_phase/pages/event_chooser.dart';
 
 class GuestListScreen extends StatelessWidget {
-  final GuestListController _getxController = Get.put(GuestListController());
+  final GuestListController _getxController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +45,7 @@ class GuestListScreen extends StatelessWidget {
             enablePullUp: true,
             header: WaterDropHeader(),
             footer: CustomFooter(
-              builder: (BuildContext context, LoadStatus mode) {
+              builder: (BuildContext context, LoadStatus? mode) {
                 Widget body;
                 if (mode == LoadStatus.idle) {
                   body = Text("pull up load");
@@ -87,7 +87,7 @@ class GuestListScreen extends StatelessWidget {
                         final item = box.getAt(index);
                         return GestureDetector(
                           onTap: () {
-                            _getxController.setGuest(item);
+                            _getxController.setGuest(item as Guest);
                             Get.back(result: "success");
                           },
                           child: Container(
@@ -117,7 +117,7 @@ class GuestListScreen extends StatelessWidget {
                                                   CrossAxisAlignment.center,
                                               children: [
                                                 Text(
-                                                  item.name,
+                                                  item?.name ?? "",
                                                   style: TextStyle(
                                                       color: Colors.white,
                                                       fontWeight:
@@ -127,7 +127,7 @@ class GuestListScreen extends StatelessWidget {
                                                 SizedBox(
                                                   height: 10,
                                                 ),
-                                                Text(item.birthdate,
+                                                Text(item?.birthdate ?? "",
                                                     style: TextStyle(
                                                         color: Colors.white,
                                                         fontWeight:

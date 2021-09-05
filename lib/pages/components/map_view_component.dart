@@ -7,7 +7,7 @@ import 'package:suitmedia_first_phase/controller/event_list_controller.dart';
 import 'package:latlong2/latlong.dart';
 
 class MapViewComponent extends StatelessWidget {
-  final EventListController getXController = Get.put(EventListController());
+  final EventListController getXController = Get.find();
 
   @override
   Widget build(BuildContext context) {

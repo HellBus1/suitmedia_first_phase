@@ -14,7 +14,7 @@ class Guest extends HiveObject {
   @HiveField(2)
   final String birthdate;
 
-  Guest({@required this.id, @required this.name, @required this.birthdate});
+  Guest({required this.id, required this.name, required this.birthdate});
 
   factory Guest.fromJson(Map<String, dynamic> json) {
     return Guest(

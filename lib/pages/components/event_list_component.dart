@@ -8,8 +8,7 @@ import 'package:suitmedia_first_phase/controller/event_list_controller.dart';
 import 'package:suitmedia_first_phase/pages/event_chooser.dart';
 
 class EventListComponent extends StatelessWidget {
-  final EventListController eventListController =
-      Get.put(EventListController());
+  final EventListController eventListController = Get.find();
 
   @override
   Widget build(BuildContext context) {
