@@ -22,7 +22,7 @@ class GuestListController extends GetxController {
 
   void onRefresh() async {
     // monitor network fetch
-    await Future.delayed(Duration(milliseconds: 1000));
+    await _fetchGuests();
     // Navigator.popAndPushNamed(context, '/guest/list');
     // if failed,use refreshFailed()
     refreshController.refreshCompleted();
@@ -30,7 +30,8 @@ class GuestListController extends GetxController {
 
   void onLoading() async {
     // monitor network fetch
-    await Future.delayed(Duration(milliseconds: 1000));
+    // await Future.delayed(Duration(milliseconds: 1000));
+    await _fetchGuests();
     refreshController.loadComplete();
   }
 
@@ -58,7 +59,7 @@ class GuestListController extends GetxController {
         await box.clear();
       }
       for (var tempJson in response) {
-        box.add(tempJson);
+        box.put(tempJson.id, tempJson);
       }
     } catch (e) {
       debugPrint("Fecth guest error -- onCatch ${e.toString()}");
