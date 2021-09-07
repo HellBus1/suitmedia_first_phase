@@ -25,6 +25,7 @@ class GuestListController extends GetxController {
     await _fetchGuests();
     // Navigator.popAndPushNamed(context, '/guest/list');
     // if failed,use refreshFailed()
+    await _getAllGuest();
     refreshController.refreshCompleted();
   }
 
@@ -32,6 +33,7 @@ class GuestListController extends GetxController {
     // monitor network fetch
     // await Future.delayed(Duration(milliseconds: 1000));
     await _fetchGuests();
+    await _getAllGuest();
     refreshController.loadComplete();
   }
 
@@ -52,7 +54,6 @@ class GuestListController extends GetxController {
           ApiClient(Dio(BaseOptions(contentType: "application/json")));
       final response = await client.getGuest();
       print("get guest $response");
-      guestList.clear();
 
       var box = Hive.box<Guest>('guest');
       if (box.length >= 1) {
@@ -66,6 +67,13 @@ class GuestListController extends GetxController {
     }
   }
 
+  _getAllGuest() async {
+    final box = await Hive.openBox<Guest>('guest');
+    guestList.clear();
+    guestList.addAll(box.values.toList());
+    update();
+  }
+
   setGuest(Guest guest) {
     this.guest.value = guest;
     update();
@@ -73,7 +81,8 @@ class GuestListController extends GetxController {
 
   @override
   void onInit() async {
-    _fetchGuests();
+    await _fetchGuests();
+    await _getAllGuest();
     super.onInit();
   }
 
